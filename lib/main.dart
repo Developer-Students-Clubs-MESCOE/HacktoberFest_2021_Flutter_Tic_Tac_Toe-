@@ -5,7 +5,7 @@
  * 3. Changing players.  = DONE
  * 4. Checking winner.  = DONE
  * 5. Checking draw game. = DONE
- * 6. Keep track of player. score.
+ * 6. Keep track of player. score. = DONE
  * */
 
 /* 
