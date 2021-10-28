@@ -16,7 +16,7 @@ import 'package:flutter/material.dart';
 void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false, // To remove debug tag.
-    home: TicTacEmo(), // This is constructor.
+    home: GameBoard(), // This is constructor.
   ));
 }
 
@@ -46,13 +46,13 @@ class Utils {
   }
 }
 
-class TicTacEmo extends StatefulWidget {
+class GameBoard extends StatefulWidget {
   @override
-  _TicTacEmoState createState() =>
-      _TicTacEmoState(); //a developer would usualy use _classname_State
+  _GameBoardState createState() =>
+      _GameBoardState(); //a developer would usualy use _classname_State
 }
 
-class _TicTacEmoState extends State<TicTacEmo> {
+class _GameBoardState extends State<GameBoard> {
   late List<List<String>> matrix;
   final int matrixSize = 3;
   late String lastMove = Players.noPlayer;
