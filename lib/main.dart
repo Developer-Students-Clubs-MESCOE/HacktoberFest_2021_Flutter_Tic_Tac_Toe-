@@ -187,8 +187,8 @@ class _GameBoardState extends State<GameBoard> {
       });
       showEndDialog("Player $lastMove has won");
     } else if (isDraw()) {
-      print("Undecided Game!");
-      showEndDialog("Undecided Game!");
+      print("Draw!");
+      showEndDialog("Draw!");
     }
   }
 
