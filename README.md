@@ -6,7 +6,7 @@ This is a Tic-Tac-Toe game built with Flutter.
 
 <img src="https://user-images.githubusercontent.com/49291509/139168629-6cea0d56-fae0-479a-8e3e-0c5aaef5cf95.png" width="70" />
 
-## Player
+## The way it works
 
 There's are two player in this game (as the original one).
 - The first one is represented by the pan with an egg '🍳'
