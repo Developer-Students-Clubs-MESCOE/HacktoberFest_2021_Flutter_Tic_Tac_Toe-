@@ -86,28 +86,70 @@ class _GameBoardState extends State<GameBoard> {
           Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
             Column(
               children: [
-                Text(
-                  "Player ${Players.X}",
-                  style: TextStyle(color: Colors.white, fontSize: 22),
-                ),
-                Text(
-                  " $playerXScore",
-                  style: TextStyle(color: Colors.white, fontSize: 22),
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(15),
+                    boxShadow: [
+                        BoxShadow(
+                            color: Colors.grey.withOpacity(0.9),
+                            spreadRadius: 3,
+                            blurRadius: 5,
+                            offset: const Offset(0,2)
+                        )
+                    ],
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Column(
+                      children:[
+                        Text(
+                          "Player ${Players.X}",
+                          style: TextStyle(color: Colors.black, fontSize: 22),
+                        ),
+                        Text(
+                          " $playerXScore",
+                          style: TextStyle(color: Colors.black, fontSize: 22),
+                        ),
+                      ]
+                    ),
+                  ),
                 ),
               ],
             ),
             Column(
               children: [
-                Text(
-                  "Player ${Players.O}",
-                  style: TextStyle(color: Colors.white, fontSize: 22),
-                ),
-                Text(
-                  " $playerOScore",
-                  style: TextStyle(color: Colors.white, fontSize: 22),
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(15),
+                    boxShadow: [
+                      BoxShadow(
+                          color: Colors.grey.withOpacity(0.9),
+                          spreadRadius: 4,
+                          blurRadius: 7,
+                          offset: const Offset(0,2)
+                      )
+                    ],
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Column(
+                        children:[
+                          Text(
+                            "Player ${Players.O}",
+                            style: TextStyle(color: Colors.black, fontSize: 22),
+                          ),
+                          Text(
+                            " $playerOScore",
+                            style: TextStyle(color: Colors.black, fontSize: 22),
+                          ),
+                        ]
+                    ),
+                  ),
                 ),
               ],
-            ),
+            )
           ]),
           Column(
             //actually board
@@ -120,9 +162,20 @@ class _GameBoardState extends State<GameBoard> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                "Player ${lastMove == Players.X ? Players.O : Players.X}'s Turn",
-                style: TextStyle(color: Colors.white, fontSize: 22),
+              OutlinedButton(
+                style: OutlinedButton.styleFrom(
+                  side: const BorderSide(
+                    color: Colors.white
+                  )
+                ),
+                onPressed: (){},
+                child: Padding(
+                  padding: const EdgeInsets.all(7),
+                  child: Text(
+                    "Player ${lastMove == Players.X ? Players.O : Players.X}'s Turn",
+                    style: TextStyle(color: Colors.white, fontSize: 22),
+                  ),
+                ),
               ),
             ],
           ),
