@@ -16,7 +16,7 @@ import 'package:flutter/material.dart';
 void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false, // To remove debug tag.
-    home: TicTacEmo(), // This is constructor.
+    home: GameBoard(), // This is constructor.
   ));
 }
 
@@ -46,13 +46,13 @@ class Utils {
   }
 }
 
-class TicTacEmo extends StatefulWidget {
+class GameBoard extends StatefulWidget {
   @override
-  _TicTacEmoState createState() =>
-      _TicTacEmoState(); //a developer would usualy use _classname_State
+  _GameBoardState createState() =>
+      _GameBoardState(); //a developer would usualy use _classname_State
 }
 
-class _TicTacEmoState extends State<TicTacEmo> {
+class _GameBoardState extends State<GameBoard> {
   late List<List<String>> matrix;
   final int matrixSize = 3;
   late String lastMove = Players.noPlayer;
@@ -86,28 +86,70 @@ class _TicTacEmoState extends State<TicTacEmo> {
           Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
             Column(
               children: [
-                Text(
-                  "Player ${Players.X}",
-                  style: TextStyle(color: Colors.white, fontSize: 22),
-                ),
-                Text(
-                  " $playerXScore",
-                  style: TextStyle(color: Colors.white, fontSize: 22),
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(15),
+                    boxShadow: [
+                        BoxShadow(
+                            color: Colors.grey.withOpacity(0.9),
+                            spreadRadius: 3,
+                            blurRadius: 5,
+                            offset: const Offset(0,2)
+                        )
+                    ],
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Column(
+                      children:[
+                        Text(
+                          "Player ${Players.X}",
+                          style: TextStyle(color: Colors.black, fontSize: 22),
+                        ),
+                        Text(
+                          " $playerXScore",
+                          style: TextStyle(color: Colors.black, fontSize: 22),
+                        ),
+                      ]
+                    ),
+                  ),
                 ),
               ],
             ),
             Column(
               children: [
-                Text(
-                  "Player ${Players.O}",
-                  style: TextStyle(color: Colors.white, fontSize: 22),
-                ),
-                Text(
-                  " $playerOScore",
-                  style: TextStyle(color: Colors.white, fontSize: 22),
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(15),
+                    boxShadow: [
+                      BoxShadow(
+                          color: Colors.grey.withOpacity(0.9),
+                          spreadRadius: 4,
+                          blurRadius: 7,
+                          offset: const Offset(0,2)
+                      )
+                    ],
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Column(
+                        children:[
+                          Text(
+                            "Player ${Players.O}",
+                            style: TextStyle(color: Colors.black, fontSize: 22),
+                          ),
+                          Text(
+                            " $playerOScore",
+                            style: TextStyle(color: Colors.black, fontSize: 22),
+                          ),
+                        ]
+                    ),
+                  ),
                 ),
               ],
-            ),
+            )
           ]),
           Column(
             //actually board
@@ -120,9 +162,20 @@ class _TicTacEmoState extends State<TicTacEmo> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                "Player ${lastMove == Players.X ? Players.O : Players.X}'s Turn",
-                style: TextStyle(color: Colors.white, fontSize: 22),
+              OutlinedButton(
+                style: OutlinedButton.styleFrom(
+                  side: const BorderSide(
+                    color: Colors.white
+                  )
+                ),
+                onPressed: (){},
+                child: Padding(
+                  padding: const EdgeInsets.all(7),
+                  child: Text(
+                    "Player ${lastMove == Players.X ? Players.O : Players.X}'s Turn",
+                    style: TextStyle(color: Colors.white, fontSize: 22),
+                  ),
+                ),
               ),
             ],
           ),
@@ -187,8 +240,8 @@ class _TicTacEmoState extends State<TicTacEmo> {
       });
       showEndDialog("Player $lastMove has won");
     } else if (isDraw()) {
-      print("Undecided Game!");
-      showEndDialog("Undecided Game!");
+      print("Draw!");
+      showEndDialog("Draw!");
     }
   }
 
