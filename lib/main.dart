@@ -23,7 +23,7 @@ void main() {
 class Players {
   String? X; //static is used not to change values.
   String? O;
-  static String noPlayer = '';
+  String noPlayer = '';
 
     Players(this.X, this.O);
 }
@@ -51,10 +51,10 @@ class GameBoard extends StatefulWidget {
 class _GameBoardState extends State<GameBoard> {
   late List<List<String>> matrix;
   final int matrixSize = 3;
-  late String lastMove = Players.noPlayer;
   int playerXScore = 0;
   int playerOScore = 0;
   late Players p;
+  late String lastMove = p.noPlayer;
 
   @override
   void initState() {
@@ -68,7 +68,7 @@ class _GameBoardState extends State<GameBoard> {
         matrixSize,
         (_) => List.generate(
             matrixSize,
-            (_) => Players
+            (_) => p
                 .noPlayer)); //passing a funtion in  will tell to fill the class
   }
 
@@ -219,7 +219,7 @@ class _GameBoardState extends State<GameBoard> {
   }
 
   void setField(String value, int x, int y) {
-    if (value == Players.noPlayer) {
+    if (value == p.noPlayer) {
       final nextPlayer = lastMove == p.X ? p.O : p.X;
       setState(() {
         //Stateful widget will only update if there is setState()
@@ -268,7 +268,7 @@ class _GameBoardState extends State<GameBoard> {
 
   bool isDraw() {
     return matrix
-        .every((row) => row.every((element) => element != Players.noPlayer));
+        .every((row) => row.every((element) => element != p.noPlayer));
   }
 
   bool isWinner(int x, int y) {
