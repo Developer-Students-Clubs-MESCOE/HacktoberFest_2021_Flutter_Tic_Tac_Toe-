@@ -21,15 +21,11 @@ void main() {
 }
 
 class Players {
-  static String? X; //static is used not to change values.
-  static String? O;
+  String? X; //static is used not to change values.
+  String? O;
   static String noPlayer = '';
 
-  static void setPlayers(String X, String O) {
-    // Static function which returns nothing.(You can not use this pointer in static function)
-    Players.X = X;
-    Players.O = O;
-  }
+    Players(this.X, this.O);
 }
 
 class Utils {
@@ -58,11 +54,12 @@ class _GameBoardState extends State<GameBoard> {
   late String lastMove = Players.noPlayer;
   int playerXScore = 0;
   int playerOScore = 0;
+  late Players p;
 
   @override
   void initState() {
     super.initState();
-    Players.setPlayers('🍳', '🥚');
+    p = Players('🍳', '🥚');
     setEmptyFields();
   }
 
@@ -77,7 +74,7 @@ class _GameBoardState extends State<GameBoard> {
 
   @override
   Widget build(BuildContext context) {
-    String? nextPlayer = lastMove == Players.X ? Players.O : Players.X;
+    String? nextPlayer = lastMove == p.X ? p.O : p.X;
     return Scaffold(
       backgroundColor: getPlayerColor(nextPlayer!).withAlpha(150),
       body: Column(
@@ -104,7 +101,7 @@ class _GameBoardState extends State<GameBoard> {
                     child: Column(
                       children:[
                         Text(
-                          "Player ${Players.X}",
+                          "Player ${p.X}",
                           style: TextStyle(color: Colors.black, fontSize: 22),
                         ),
                         Text(
@@ -137,7 +134,7 @@ class _GameBoardState extends State<GameBoard> {
                     child: Column(
                         children:[
                           Text(
-                            "Player ${Players.O}",
+                            "Player ${p.O}",
                             style: TextStyle(color: Colors.black, fontSize: 22),
                           ),
                           Text(
@@ -172,7 +169,7 @@ class _GameBoardState extends State<GameBoard> {
                 child: Padding(
                   padding: const EdgeInsets.all(7),
                   child: Text(
-                    "Player ${lastMove == Players.X ? Players.O : Players.X}'s Turn",
+                    "Player ${lastMove == p.X ? p.O : p.X}'s Turn",
                     style: TextStyle(color: Colors.white, fontSize: 22),
                   ),
                 ),
@@ -195,9 +192,9 @@ class _GameBoardState extends State<GameBoard> {
   }
 
   Color getPlayerColor(String player) {
-    if (player == Players.X)
+    if (player == p.X)
       return Color(0xfffee440);
-    else if (player == Players.O)
+    else if (player == p.O)
       return Color(0xffcaf0f8);
     else
       return Colors.white;
@@ -223,7 +220,7 @@ class _GameBoardState extends State<GameBoard> {
 
   void setField(String value, int x, int y) {
     if (value == Players.noPlayer) {
-      final nextPlayer = lastMove == Players.X ? Players.O : Players.X;
+      final nextPlayer = lastMove == p.X ? p.O : p.X;
       setState(() {
         //Stateful widget will only update if there is setState()
         matrix[x][y] = nextPlayer!;
@@ -233,7 +230,7 @@ class _GameBoardState extends State<GameBoard> {
     if (isWinner(x, y)) {
       print("Player $lastMove has won");
       setState(() {
-        if (lastMove == Players.X)
+        if (lastMove == p.X)
           playerXScore++;
         else
           playerOScore++;
