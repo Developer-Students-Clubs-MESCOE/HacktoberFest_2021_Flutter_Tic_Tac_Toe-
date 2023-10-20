@@ -173,8 +173,7 @@ class _GameBoardState extends State<GameBoard> {
             child: Center(
               child: Lottie.asset(
                 'assets/celebration_animation.json', // Replace with your animation file path
-                width: 200, // Set the width
-                height: 200, // Set the height
+                 // Set the height
               ),
             ),
           ),
@@ -226,7 +225,7 @@ class _GameBoardState extends State<GameBoard> {
       showCelebration = true;
     });
 
-    await Future.delayed(Duration(seconds: 8)); // Wait for 8 seconds
+    await Future.delayed(Duration(seconds: 4)); // Wait for 8 seconds
 
     setState(() {
       showCelebration = false; // Hide the animation after 8 seconds
