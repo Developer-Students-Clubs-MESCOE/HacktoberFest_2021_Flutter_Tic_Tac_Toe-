@@ -33,7 +33,7 @@ class Utils {
 class GameBoard extends StatefulWidget {
   @override
   _GameBoardState createState() =>
-      _GameBoardState(); //
+      _GameBoardState(); // a developer would usually use _classname_State
 }
 
 class _GameBoardState extends State<GameBoard> {
@@ -221,6 +221,18 @@ class _GameBoardState extends State<GameBoard> {
     );
   }
 
+  Future<void> _startCelebrationAnimation() async {
+    setState(() {
+      showCelebration = true;
+    });
+
+    await Future.delayed(Duration(seconds: 8)); // Wait for 8 seconds
+
+    setState(() {
+      showCelebration = false; // Hide the animation after 8 seconds
+    });
+  }
+
   void setField(String value, int x, int y) {
     if (value == p.noPlayer) {
       final nextPlayer = lastMove == p.X ? p.O : p.X;
@@ -236,8 +248,8 @@ class _GameBoardState extends State<GameBoard> {
           playerXScore++;
         else
           playerOScore++;
-        showCelebration = true; // Show the Lottie animation
       });
+      _startCelebrationAnimation(); // Start the celebration animation
       showEndDialog("Player $lastMove has won");
     } else if (isDraw()) {
       print("Draw!");
@@ -288,3 +300,5 @@ class _GameBoardState extends State<GameBoard> {
     return row == n || col == n || diag == n || antiDiag == n;
   }
 }
+
+
